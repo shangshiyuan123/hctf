@@ -31,10 +31,10 @@ public interface CopyrightDao {
 
     /**
      * 删除数据 (批量删除数据)
-     * @param id
+     * @param ids
      * @return
      */
-    public int delete(String[] id);
+    public int batch(String[] ids);
 
 
     /**

@@ -35,4 +35,22 @@ public class Copyright extends BaseEntity {
     public void setCompany(String company){
         this.company = company;
     }
+
+    @Override
+    public String toString() {
+        return "Copyright{" +
+                "copyrightId='" + copyrightId + '\'' +
+                ", copyrightName='" + copyrightName + '\'' +
+                ", company='" + company + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", createUser=" + createUser +
+                ", updateUser=" + updateUser +
+                ", delFlag=" + delFlag +
+                ", isNewRecord=" + isNewRecord +
+                ", page=" + page +
+                ", sqlMap=" + sqlMap +
+                '}';
+    }
 }

@@ -13,7 +13,10 @@ INSERT INTO COPYRIGHT(COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK)VALUES (#{copyr
     </insert>
 
     <select id="findList" resultMap="resultCopyright">
-        SELECT COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE 1=1
+        SELECT COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE 1=1
     </select>
 
+    <delete id="delete" parameterType="string">
+        DELETE FROM COPYRIGHT WHERE COPYRIGHT_ID=#{copyrightId}
+    </delete>
 </mapper>

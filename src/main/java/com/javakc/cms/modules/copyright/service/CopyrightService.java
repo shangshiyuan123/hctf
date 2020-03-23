@@ -39,12 +39,22 @@ public class CopyrightService {
 
     /**
      * 删除数据 (批量删除数据)
+     * @param ids
+     */
+    @Transactional(readOnly = false)
+    public void batch(String[] ids) {
+        dao.batch(ids);
+    }
+
+    /**
+     * 删除数据 (批量删除数据)
      * @param id
      */
     @Transactional(readOnly = false)
-    public void delete(String[] id) {
+    public void delete(String id) {
         dao.delete(id);
     }
+
 
     /**
      * 获取单条数据

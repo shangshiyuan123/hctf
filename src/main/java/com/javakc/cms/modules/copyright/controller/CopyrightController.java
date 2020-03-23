@@ -6,7 +6,7 @@ import com.javakc.cms.modules.copyright.entity.Copyright;
 import com.javakc.cms.modules.copyright.service.CopyrightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,5 +31,19 @@ public class CopyrightController {
         modelAndView.addObject("page",page);
         return modelAndView;
     }
+    @RequestMapping("create")
+        public String create(Copyright entity){
+        copyrightService.save(entity);
+        return "redirect:/copyright/queryCopyright.do";
+    }
+
+    @RequestMapping("delete/{copyrightId}")
+    public String delete(@PathVariable String copyrightId){
+        System.out.println(copyrightId);
+        copyrightService.delete(copyrightId);
+        return "redirect:/copyright/queryCopyright.do";
+    }
+
+
     }
 
