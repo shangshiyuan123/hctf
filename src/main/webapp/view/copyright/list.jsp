@@ -13,7 +13,6 @@
 </head>
 
 <body>
-${page.list}
 <div class="container">
     <form>
         <div class="form-group col-md-3">
@@ -79,7 +78,7 @@ ${page.list}
                     <td></td>
                     <td>
                         <a class="col-md-2" href="javascript:ondelete('${u.copyrightId}');">删除</a>
-                        <a class="col-md-2" href="">修改</a>
+                        <a class="col-md-2" href="javascript:toupdate('${u.copyrightId}');">修改</a>
                         <a class="col-md-4" href="">管理客户</a>
                         <a class="col-md-4" href="">书单管理</a>
                     </td>
@@ -94,9 +93,14 @@ ${page.list}
 <script type="text/javascript" src="<%=path%>/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-        /*批量-删除*/
+
+    function toupdate( copyrightId) {
+        alert(copyrightId)
+        window.location.href = '<%=path%>/copyright/queryById/' + copyrightId + '.do';
+    }
+
+    /*批量-删除*/
         function ondelete( copyrightId) {
-            alert(copyrightId)
                 window.location.href = '<%=path%>/copyright/delete/' + copyrightId + '.do';
         }
 

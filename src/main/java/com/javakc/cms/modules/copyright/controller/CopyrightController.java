@@ -6,11 +6,14 @@ import com.javakc.cms.modules.copyright.entity.Copyright;
 import com.javakc.cms.modules.copyright.service.CopyrightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.registry.infomodel.User;
+
 
 @Controller
 @RequestMapping("copyright")
@@ -39,11 +42,22 @@ public class CopyrightController {
 
     @RequestMapping("delete/{copyrightId}")
     public String delete(@PathVariable String copyrightId){
-        System.out.println(copyrightId);
         copyrightService.delete(copyrightId);
         return "redirect:/copyright/queryCopyright.do";
     }
 
+    @RequestMapping("queryById/{copyrightId}")
+    public String queryById(@PathVariable String copyrightId, ModelMap model){
+       Copyright entity=copyrightService.get(copyrightId);
+        System.out.println(entity);
+        model.put("entity",entity);
+        return "copyright/update";
+    }
 
+    @RequestMapping("update")
+    public String update(Copyright entity){
+        copyrightService.update(entity);
+        return "redirect:/copyright/queryCopyright.do";
+    }
     }
 
