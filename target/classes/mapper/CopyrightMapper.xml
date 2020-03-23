@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javakc.cms.modules.copyright.dao.CopyrightDao">
+    <resultMap id="resultCopyright" type="com.javakc.cms.modules.copyright.entity.Copyright">
+        <id column="COPYRIGHT_ID" property="copyrightId"></id>
+        <result column="COPYRIGHT_NAME" property="copyrightName"></result>
+        <result column="COMPANY" property="company"></result>
+        <result column="REMARK" property="remarks"></result>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.javakc.cms.modules.copyright.entity.Copyright">
+INSERT INTO COPYRIGHT(COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK)VALUES (#{copyrightId},#{copyrightName},#{company},#{remarks})
+    </insert>
+
+    <select id="findList" resultMap="resultCopyright">
+        SELECT COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE 1=1
+    </select>
+
+</mapper>
