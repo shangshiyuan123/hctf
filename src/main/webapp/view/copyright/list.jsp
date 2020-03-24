@@ -83,8 +83,8 @@
                     <td>
                         <a class="col-md-2" href="javascript:ondelete('${u.copyrightId}');">删除</a>
                         <a class="col-md-2" href="javascript:toupdate('${u.copyrightId}');">修改</a>
-                        <a class="col-md-4" href="">管理客户</a>
-                        <a class="col-md-4" href="">书单管理</a>
+                        <a class="col-md-4" href="<%=path%>/view/customer/list.jsp">管理客户</a>
+                        <a class="col-md-4" href="<%=path%>/view/booklist/list.jsp">书单管理</a>
                     </td>
                 </tr>
             </c:forEach>
