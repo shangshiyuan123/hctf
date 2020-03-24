@@ -1,15 +1,16 @@
 package com.javakc.cms.modules.customer.entity;
 
+import com.javakc.cms.base.entity.BaseEntity;
+import com.javakc.cms.modules.copyright.entity.Copyright;
+
 import java.util.Date;
 
-public class Customer {
+public class Customer extends BaseEntity {
 
     /** 主键id;客户主键 */
     private String customerId ;
     /** 姓名;客户名称 */
     private String name ;
-    /** 版权名;版权名称 */
-    private String copyrightName ;
     /** 性别;性别：1男，2女 */
     private Integer gender ;
     /** 出生日期;出生日期 */
@@ -26,12 +27,10 @@ public class Customer {
     private String qq ;
     /** 公司地址;公司地址 */
     private String companyAddress ;
-    /** 备注;备注 */
-    private String remarks ;
     /** 状态;1版权方，2运营方 */
     private Integer status ;
     /** 版权外键;版权外键 */
-    private String copyrightId ;
+    private Copyright copyright;
 
     /** 主键id;客户主键 */
     public String getCustomerId(){
@@ -48,14 +47,6 @@ public class Customer {
     /** 姓名;客户名称 */
     public void setName(String name){
         this.name = name;
-    }
-    /** 版权名;版权名称 */
-    public String getCopyrightName(){
-        return this.copyrightName;
-    }
-    /** 版权名;版权名称 */
-    public void setCopyrightName(String copyrightName){
-        this.copyrightName = copyrightName;
     }
     /** 性别;性别：1男，2女 */
     public Integer getGender(){
@@ -137,12 +128,12 @@ public class Customer {
     public void setStatus(Integer status){
         this.status = status;
     }
-    /** 版权外键;版权外键 */
-    public String getCopyrightId(){
-        return this.copyrightId;
+
+    public Copyright getCopyright() {
+        return copyright;
     }
-    /** 版权外键;版权外键 */
-    public void setCopyrightId(String copyrightId){
-        this.copyrightId = copyrightId;
+
+    public void setCopyright(Copyright copyright) {
+        this.copyright = copyright;
     }
 }
