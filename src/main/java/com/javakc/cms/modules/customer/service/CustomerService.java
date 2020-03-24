@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CustomerService {
     @Autowired
     CustomerDao customerDao;
-
+    @Transactional(readOnly = false)
     public void save(Customer entity){
         entity.setCustomerId(UUID.randomUUID().toString().replace("-",""));
         customerDao.insert(entity);
