@@ -12,8 +12,41 @@
 INSERT INTO COPYRIGHT(COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK)VALUES (#{copyrightId},#{copyrightName},#{company},#{remarks})
     </insert>
 
-    <select id="findList" resultMap="resultCopyright">
-        SELECT COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE 1=1
+    <select id="findList" resultMap="resultCopyright" parameterType="map">
+        SELECT COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE 1=1
+        <if test="copyrightName != null and copyrightName != ''">
+            AND COPYRIGHT_NAME LIKE '%'||#{copyrightName}||'%'
+        </if>
+        <if test="company != null and company != ''">
+            AND COMPANY LIKE '%'||#{company}||'%'
+        </if>
+        <if test="remarks != null and remarks != ''">
+            AND REMARK LIKE '%'||#{remarks}||'%'
+        </if>
     </select>
 
+    <select id="queryByCount" parameterType="map" resultType="long">
+        SELECT COUNT(1) FROM COPYRIGHT where 1=1
+        <if test="copyrightName != null and copyrightName != ''">
+        AND COPYRIGHT_NAME LIKE '%'||#{copyrightName}||'%'
+    </if>
+        <if test="company != null and company != ''">
+            AND COMPANY LIKE '%'||#{company}||'%'
+        </if>
+        <if test="remarks != null and remarks != ''">
+            AND REMARK LIKE '%'||#{remarks}||'%'
+        </if>
+    </select>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM COPYRIGHT WHERE COPYRIGHT_ID=#{copyrightId}
+    </delete>
+
+    <select id="get" parameterType="string" resultMap="resultCopyright">
+       SELECT COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE COPYRIGHT_ID=#{copyrightId}
+    </select>
+
+    <update id="update" parameterType="com.javakc.cms.modules.copyright.entity.Copyright">
+UPDATE COPYRIGHT SET COPYRIGHT_NAME=#{copyrightName},COMPANY=#{company},REMARK=#{remarks} WHERE COPYRIGHT_ID=#{copyrightId}
+    </update>
 </mapper>

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -39,12 +41,22 @@ public class CopyrightService {
 
     /**
      * 删除数据 (批量删除数据)
+     * @param ids
+     */
+    @Transactional(readOnly = false)
+    public void batch(String[] ids) {
+        dao.batch(ids);
+    }
+
+    /**
+     * 删除数据 (批量删除数据)
      * @param id
      */
     @Transactional(readOnly = false)
-    public void delete(String[] id) {
+    public void delete(String id) {
         dao.delete(id);
     }
+
 
     /**
      * 获取单条数据
@@ -61,11 +73,22 @@ public class CopyrightService {
      * @param entity
      * @return
      */
-    public Page findList(Copyright entity,Page page){
-        entity.setPage(page);
-        List<Copyright> list = dao.findList(entity);
-        page.setList(list);
-        return page;
+    public List<Copyright> findList(Copyright entity,int start,int size){
+        Map<String,Object> param=new HashMap<>();
+        param.put("start",start);
+        param.put("size",size);
+        param.put("copyrightName",entity.getCopyrightName());
+        param.put("company",entity.getCompany());
+        param.put("remarks",entity.getRemarks());
+        return dao.findList(param);
+    }
+
+    public long queryByCount(Copyright entity){
+        Map<String,Object> param=new HashMap<>();
+        param.put("copyrightName",entity.getCopyrightName());
+        param.put("company",entity.getCompany());
+        param.put("remarks",entity.getRemarks());
+        return dao.queryByCount(param);
     }
     /**
      * 查询所有数据
