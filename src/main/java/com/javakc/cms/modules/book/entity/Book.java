@@ -1,8 +1,10 @@
 package com.javakc.cms.modules.book.entity;
 
+import com.javakc.cms.base.entity.BaseEntity;
+
 import java.util.Date;
 
-public class Book {
+public class Book extends BaseEntity<Book> {
     /** 书籍id;塔读书籍id */
     private String bookTdid ;
     /** cp书籍id;书籍主键 */
