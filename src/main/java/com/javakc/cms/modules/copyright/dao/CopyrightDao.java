@@ -4,6 +4,7 @@ package com.javakc.cms.modules.copyright.dao;
 import com.javakc.cms.modules.copyright.entity.Copyright;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CopyrightDao {
     /**
@@ -47,11 +48,11 @@ public interface CopyrightDao {
 
     /**
      * 查询数据列表，如果需要分页，请设置分页对象，如：entity.setPage(new Page<T>());
-     * @param entity
+     * @param param
      * @return
      */
-    public List<Copyright> findList(Copyright entity);
-
+    public List<Copyright> findList(Map<String,Object> param);
+    public long queryByCount(Map<String,Object> param);
 
     /**
      * 查询所有数据列表

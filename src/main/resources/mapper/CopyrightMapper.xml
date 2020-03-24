@@ -12,8 +12,30 @@
 INSERT INTO COPYRIGHT(COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK)VALUES (#{copyrightId},#{copyrightName},#{company},#{remarks})
     </insert>
 
-    <select id="findList" resultMap="resultCopyright">
+    <select id="findList" resultMap="resultCopyright" parameterType="map">
         SELECT COPYRIGHT_ID,COPYRIGHT_NAME,COMPANY,REMARK FROM COPYRIGHT WHERE 1=1
+        <if test="copyrightName != null and copyrightName != ''">
+            AND COPYRIGHT_NAME LIKE '%'||#{copyrightName}||'%'
+        </if>
+        <if test="company != null and company != ''">
+            AND COMPANY LIKE '%'||#{company}||'%'
+        </if>
+        <if test="remarks != null and remarks != ''">
+            AND REMARK LIKE '%'||#{remarks}||'%'
+        </if>
+    </select>
+
+    <select id="queryByCount" parameterType="map" resultType="long">
+        SELECT COUNT(1) FROM COPYRIGHT where 1=1
+        <if test="copyrightName != null and copyrightName != ''">
+        AND COPYRIGHT_NAME LIKE '%'||#{copyrightName}||'%'
+    </if>
+        <if test="company != null and company != ''">
+            AND COMPANY LIKE '%'||#{company}||'%'
+        </if>
+        <if test="remarks != null and remarks != ''">
+            AND REMARK LIKE '%'||#{remarks}||'%'
+        </if>
     </select>
 
     <delete id="delete" parameterType="string">

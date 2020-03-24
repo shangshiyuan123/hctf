@@ -19,19 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 public class CopyrightController {
     @Autowired
     CopyrightService copyrightService;
-    /**
-     * 根据条件进行分页查询测试信息数据
-     * @param entity
-     * @param request
-     * @param response
-     * @return
-     */
+
     @RequestMapping("queryCopyright")
-    public ModelAndView queryCopyright(Copyright entity, HttpServletRequest request, HttpServletResponse response){
-        ModelAndView modelAndView=new ModelAndView("copyright/list");
-        Page page= copyrightService.findList(entity,new Page(request,response));
-        modelAndView.addObject("page",page);
-        return modelAndView;
+    public String queryCopyright(Copyright entity, Page page,ModelMap model){
+        page.setList(copyrightService.findList(entity,page.getStart(),page.getSize()));
+        page.setCount(copyrightService.queryByCount(entity));
+        model.put("page", page);
+        return "copyright/list";
     }
     @RequestMapping("create")
         public String create(Copyright entity){
