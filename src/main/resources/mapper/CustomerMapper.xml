@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javakc.cms.modules.customer.dao.CustomerDao">
+
+    <resultMap id="customer_copyright_map" type="com.javakc.cms.modules.customer.entity.Customer">
+        <id column="CUSTOMER_ID" property="customerId"></id>
+        <result column="NAME" property="name"></result>
+        <result column="GENDER" property="gender"></result>
+        <result column="BIRTHDAY" property="birthday"></result>
+        <result column="POST" property="post"></result>
+        <result column="TELEPHONE" property="telephone"></result>
+        <result column="LANDLINE" property="landline"></result>
+        <result column="EMAIL" property="email"></result>
+        <result column="QQ" property="qq"></result>
+        <result column="COMPANY_ADDRESS" property="companyAddress"></result>
+        <result column="REMARKS" property="remarks"></result>
+        <association property="copyright" javaType="com.javakc.cms.modules.copyright.entity.Copyright">
+             <id column="COPYRIGHT_ID" property="copyrightId"></id>
+            <result column="COPYRIGHT_NAME" property="copyrightName"></result>
+        </association>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.javakc.cms.modules.customer.entity.Customer">
+        INSERT INTO CUSTOMER(CUSTOMER_ID,NAME,GENDER,BIRTHDAY,POST,TELEPHONE,LANDLINE,EMAIL,QQ,COMPANY_ADDRESS,REMARKS)
+        VALUES (#{customerId},#{name},#{gender},#{birthday},#{post},#{telephone},#{landline},#{qq},#{email},#{company_address},#{remarks})
+    </insert>
+
+    <select id="query" parameterType="map" resultMap="customer_copyright_map">
+        SELECT CU.CUSTOMER_ID,CU.NAME,CU.GENDER,CU.BIRTHDAY,CU.POST,CU.TELEPHONE,CU.LANDLINE,CU.EMAIL,CU.QQ,CU.COMPANY_ADDRESS,CU.REMARKS,CO.COPYRIGHT_NAME FROM CUSTOMER CU LEFT JOIN COPYRIGHT CO
+        on CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
+    </select>
+
+    <select id="queryByCount" parameterType="map" resultType="long">
+        SELECT COUNT(1) FROM CUSTOMER CU LEFT JOIN COPYRIGHT CO  ON CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
+    </select>
+</mapper>
