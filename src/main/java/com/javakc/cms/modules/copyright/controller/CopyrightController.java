@@ -49,7 +49,6 @@ public class CopyrightController {
     @RequestMapping("queryById/{copyrightId}")
     public String queryById(@PathVariable String copyrightId, ModelMap model){
        Copyright entity=copyrightService.get(copyrightId);
-        System.out.println(entity);
         model.put("entity",entity);
         return "copyright/update";
     }
