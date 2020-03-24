@@ -11,8 +11,8 @@
 <body>
 
 <div class="container">
-${entity}
     <form class="form-horizontal" action="<%=path%>/copyright/update.do" method="post">
+        <input type="hidden" id="copyrightId" name="copyrightId" value="${entity.copyrightId}"/>
         <div class="form-group">
             <label for="name" class="col-md-2 control-label">版权名</label>
             <div class="col-md-6">
