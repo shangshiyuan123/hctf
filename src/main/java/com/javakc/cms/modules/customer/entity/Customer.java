@@ -2,6 +2,7 @@ package com.javakc.cms.modules.customer.entity;
 
 import com.javakc.cms.base.entity.BaseEntity;
 import com.javakc.cms.modules.copyright.entity.Copyright;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ public class Customer extends BaseEntity {
     /** 性别;性别：1男，2女 */
     private Integer gender ;
     /** 出生日期;出生日期 */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday ;
     /** 职务;职务 */
     private String post ;
@@ -135,5 +137,24 @@ public class Customer extends BaseEntity {
 
     public void setCopyright(Copyright copyright) {
         this.copyright = copyright;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId='" + customerId + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", birthday=" + birthday +
+                ", post='" + post + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", landline='" + landline + '\'' +
+                ", email='" + email + '\'' +
+                ", qq='" + qq + '\'' +
+                ", companyAddress='" + companyAddress + '\'' +
+                ", status=" + status +
+                ", copyright=" + copyright +
+                ", remarks='" + remarks + '\'' +
+                '}';
     }
 }

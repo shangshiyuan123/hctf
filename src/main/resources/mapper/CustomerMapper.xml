@@ -22,7 +22,7 @@
 
     <insert id="insert" parameterType="com.javakc.cms.modules.customer.entity.Customer">
         INSERT INTO CUSTOMER(CUSTOMER_ID,NAME,GENDER,BIRTHDAY,POST,TELEPHONE,LANDLINE,EMAIL,QQ,COMPANY_ADDRESS,REMARKS)
-        VALUES (#{customerId},#{name},#{gender},#{birthday},#{post},#{telephone},#{landline},#{qq},#{email},#{company_address},#{remarks})
+        VALUES (#{customerId},#{name},#{gender},#{birthday},#{post},#{telephone},#{landline},#{email},#{qq},#{companyAddress},#{remarks})
     </insert>
 
     <select id="query" parameterType="map" resultMap="customer_copyright_map">
