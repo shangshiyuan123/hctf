@@ -4,6 +4,7 @@
 %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<%=path%>/static/css/bootstrap.min.css" rel="stylesheet">
     <title>版权添加页面</title>
