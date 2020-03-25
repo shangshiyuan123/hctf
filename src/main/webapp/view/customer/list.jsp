@@ -12,6 +12,7 @@
     <title>客户管理</title>
     <!-- Bootstrap -->
     <link href="<%=path%>/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=path%>/static/css/jquery.page.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="container">
@@ -22,14 +23,14 @@
         </div>
         <div class="form-group col-md-4">
             <label>版权名：</label>
-            <input type="text" class="form-control" placeholder="请输入版权名称">
+            <input type="text" class="form-control" name="copyrightName" placeholder="请输入版权名称">
         </div>
         <div class="form-group col-md-4">
             <label>姓名：</label>
-            <input type="text" class="form-control" placeholder="请输入公司名称">
+            <input type="text" class="form-control" name="name" placeholder="请输入姓名">
         </div>
         <div class="form-group col-md-4">
-          <a class="btn btn-info" href="">查询</a>
+          <button class="btn btn-info" type="submit">查询</button>
         </div>
         <div class="form-group col-md-10">客户列表</div>
 

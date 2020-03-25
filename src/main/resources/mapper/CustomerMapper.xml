@@ -26,11 +26,17 @@
     </insert>
 
     <select id="query" parameterType="map" resultMap="customer_copyright_map">
-        SELECT CU.CUSTOMER_ID,CU.NAME,CU.GENDER,CU.BIRTHDAY,CU.POST,CU.TELEPHONE,CU.LANDLINE,CU.EMAIL,CU.QQ,CU.COMPANY_ADDRESS,CU.REMARKS,CO.COPYRIGHT_NAME FROM CUSTOMER CU LEFT JOIN COPYRIGHT CO
-        on CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
+        SELECT CU.CUSTOMER_ID,CU.NAME,CU.GENDER,CU.BIRTHDAY,CU.POST,CU.TELEPHONE,CU.LANDLINE,CU.EMAIL,CU.QQ,CU.COMPANY_ADDRESS,CU.REMARKS,CU.COPYRIGHT_ID,CO.COPYRIGHT_NAME FROM CUSTOMER CU,COPYRIGHT CO
+        WHERE CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
+        <if test="name != null and name != ''">
+            AND CU.NAME LIKE '%'||#{name}||'%'
+        </if>
     </select>
 
     <select id="queryByCount" parameterType="map" resultType="long">
-        SELECT COUNT(1) FROM CUSTOMER CU LEFT JOIN COPYRIGHT CO  ON CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
+        SELECT COUNT(1) FROM CUSTOMER CU,COPYRIGHT CO  WHERE CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
+        <if test="name != null and name != ''">
+            AND CU.NAME LIKE '%'||#{name}||'%'
+        </if>
     </select>
 </mapper>

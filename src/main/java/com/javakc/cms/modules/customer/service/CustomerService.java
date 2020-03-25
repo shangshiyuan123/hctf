@@ -26,10 +26,12 @@ public class CustomerService {
         Map<String,Object> param=new HashMap<>();
         param.put("start",start);
         param.put("size",size);
+        param.put("name",entity.getName());
         return customerDao.query(param);
     }
     public long queryByCount(Customer entity){
         Map<String,Object> param=new HashMap<>();
+        param.put("name",entity.getName());
         return customerDao.queryByCount(param);
     }
 
