@@ -34,9 +34,9 @@
                         <div class="panel-body">
                             <ul class="list-unstyled text-center">
                                 <li><a href="<%=path%>/copyright/queryCopyright.do">版权管理</a></li>
-                                <li><a href="#">批次管理</a></li>
+                                <li><a href="<%=path%>/book/querybook.do">批次管理</a></li>
                                 <li><a href="#">书单管理</a></li>
-                                <li><a href="#">书籍管理</a></li>
+                                <li><a href="<%=path%>/book/querybook.do">书籍管理</a></li>
                                 <li><a href="#">接口管理</a></li>
                             </ul>
                         </div>
