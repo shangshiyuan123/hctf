@@ -6,6 +6,7 @@ import com.javakc.cms.modules.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -34,6 +35,28 @@ public class CustomerController {
         return "customer/list";
     }
 
+    @RequestMapping("delete/{customerId}")
+    public String delete(@PathVariable String customerId){
+        customerService.delete(customerId);
+        return "redirect:/customer/query.do";
+    }
 
+    @RequestMapping("queryById/{customerId}")
+    public String queryById(@PathVariable String customerId, ModelMap model){
+        Customer entity=customerService.get(customerId);
+        model.put("entity",entity);
+        return "customer/update";
+    }
 
+    @RequestMapping("update")
+    public String update(Customer entity){
+        customerService.update(entity);
+        return "redirect:/customer/query.do";
+    }
+
+    @RequestMapping("batch/{ids}")
+    public String batch(@PathVariable String[] ids) {
+        customerService.batch(ids);
+        return "redirect:/customer/query.do";
+    }
 }

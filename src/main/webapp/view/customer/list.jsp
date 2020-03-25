@@ -19,7 +19,7 @@
     <form action="<%=path%>/customer/query.do" method="post">
         <div class="form-group col-md-9">
         <a class="btn btn-info" href="<%=path%>/view/customer/create.jsp">添加客户</a>
-            <a class="btn btn-info" href="">批量删除</a>
+            <a class="btn btn-info" href="javascript:;" id="batch">批量删除</a>
         </div>
         <div class="form-group col-md-4">
             <label>版权名：</label>
@@ -58,7 +58,7 @@
             <tbody>
             <c:forEach var="p" items="${page.list }" varStatus="n">
                 <tr>
-                    <td><input type="checkbox" name="ids" value="${p.customerId }"/></td>
+                    <td><input type="checkbox" name="id" value="${p.customerId }"/></td>
                     <td>${p.name}</td>
                     <td>${p.copyright.copyrightName}</td>
                     <td>${p.gender==1?"男":"女"}</td>
@@ -71,8 +71,8 @@
                     <td>${p.companyAddress}</td>
                     <td>${p.remarks}</td>
                     <td>
-                        <input type="button" class="btn btn-info" value="删除"/>
-                        <input type="button" class="btn btn-info" value="修改"/>
+                        <a class="btn btn-info"  href="javascript:ondelete('${p.customerId}');">删除</a>
+                        <a class="btn btn-info"  href="javascript:toupdate('${p.customerId}');">修改</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -81,5 +81,39 @@
     </div>
     </form>
 </div>
+
+<script type="text/javascript" src="<%=path%>/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=path%>/static/js/jquery.page2.0.js"></script>
+<script type="text/javascript" src="<%=path%>/static/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="<%=path%>/static/lib/layer/1.9.3/layer.js"></script>
+<script type="text/javascript">
+    function toupdate(customerId) {
+        window.location.href = '<%=path%>/customer/queryById/' + customerId + '.do';
+    }
+    /*批量-删除*/
+    function ondelete(customerId) {
+        window.location.href = '<%=path%>/customer/delete/' + customerId + '.do';
+    }
+    $(document).ready(function () {
+        $('#checkall').click(function () {
+            $('[name=id]').prop('checked', $(this).prop('checked'));
+        });
+        $('#batch').click(function () {
+            var len = $('[name=id]:checked').length;
+            if (len == 0) {
+                layer.alert("请至少选择一条！");
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < len; i++) {
+                ids.push($('[name=id]:checked').eq(i).val());
+            }
+            layer.confirm('确认要删除吗？', function () {
+                alert(ids)
+                window.location.href = '<%=path%>/customer/batch/' + ids + '.do';
+            });
+        });
+        });
+</script>
 </body>
 </html>

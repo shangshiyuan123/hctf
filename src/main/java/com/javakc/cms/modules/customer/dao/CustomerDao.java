@@ -14,4 +14,5 @@ public interface CustomerDao {
     public int insert(Customer entity);
     public int update(Customer entity);
     public int delete(String id);
+    public int batch(String[] ids);
 }
