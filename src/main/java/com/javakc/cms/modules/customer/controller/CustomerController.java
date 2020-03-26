@@ -29,6 +29,7 @@ public class CustomerController {
     }
     @RequestMapping("query")
     public String query(Customer entity, Page page, ModelMap model){
+        System.out.println(entity.getCopyright());
         page.setList(customerService.query(entity,page.getStart(),page.getSize()));
         page.setCount(customerService.queryByCount(entity));
         model.put("page", page);

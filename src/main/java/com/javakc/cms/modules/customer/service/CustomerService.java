@@ -49,13 +49,19 @@ public class CustomerService {
         param.put("start",start);
         param.put("size",size);
         param.put("name",entity.getName());
-//        param.put("copyrightName",entity.getCopyright().getCopyrightName());
+        if(entity.getCopyright()!=null){
+            param.put("copyrightName",entity.getCopyright().getCopyrightName());
+            System.out.println(entity.getCopyright().getCopyrightName());
+        }
+
         return customerDao.query(param);
     }
     public long queryByCount(Customer entity){
         Map<String,Object> param=new HashMap<>();
         param.put("name",entity.getName());
-//        param.put("copyrightName",entity.getCopyright().getCopyrightName());
+        if(entity.getCopyright()!=null){
+            param.put("copyrightName",entity.getCopyright().getCopyrightName());
+        }
         return customerDao.queryByCount(param);
     }
 
