@@ -22,7 +22,7 @@
 
     <insert id="insert" parameterType="com.javakc.cms.modules.customer.entity.Customer">
         INSERT INTO CUSTOMER(CUSTOMER_ID,NAME,GENDER,BIRTHDAY,POST,TELEPHONE,LANDLINE,EMAIL,QQ,COMPANY_ADDRESS,REMARKS,COPYRIGHT_ID)
-        VALUES (#{customerId},#{name},#{gender},#{birthday},#{post},#{telephone},#{landline},#{email},#{qq},#{companyAddress},#{remarks},#{copyrightId})
+        VALUES (#{customerId},#{name},#{gender},#{birthday},#{post},#{telephone},#{landline},#{email},#{qq},#{companyAddress},#{remarks},#{copyright.copyrightId})
     </insert>
 
     <delete id="delete" parameterType="string">
@@ -46,13 +46,13 @@
     </update>
 
     <select id="query" parameterType="map" resultMap="customer_copyright_map">
-        SELECT CU.CUSTOMER_ID,CU.NAME,CU.GENDER,CU.BIRTHDAY,CU.POST,CU.TELEPHONE,CU.LANDLINE,CU.EMAIL,CU.QQ,CU.COMPANY_ADDRESS,CU.REMARKS,CU.COPYRIGHT_ID,CO.COPYRIGHT_NAME FROM CUSTOMER CU,COPYRIGHT CO
+        SELECT CU.CUSTOMER_ID,CU.NAME,CU.GENDER,CU.BIRTHDAY,CU.POST,CU.TELEPHONE,CU.LANDLINE,CU.EMAIL,CU.QQ,CU.COMPANY_ADDRESS,CU.REMARKS,CU.COPYRIGHT_ID,CO.COPYRIGHT_ID,CO.COPYRIGHT_NAME FROM CUSTOMER CU,COPYRIGHT CO
         WHERE CU.COPYRIGHT_ID=CO.COPYRIGHT_ID
         <if test="name != null and name != ''">
             AND CU.NAME LIKE '%'||#{name}||'%'
         </if>
-        <if test="copyrightName!=null and copyrightName!=''">
-            AND CO.COPYRIGHT_NAME LIKE '%'||#{copyrightName}||'%'
+        <if test="copyrightId!=null and copyrightId!=''">
+            AND CU.COPYRIGHT_ID=#{copyrightId}
         </if>
     </select>
 
@@ -61,9 +61,13 @@
         <if test="name != null and name != ''">
             AND CU.NAME LIKE '%'||#{name}||'%'
         </if>
-        <if test="copyrightName!=null and copyrightName!=''">
-            AND CO.COPYRIGHT_NAME LIKE '%'||#{copyrightName}||'%'
+        <if test="copyrightId!=null and copyrightId!=''">
+            AND CU.COPYRIGHT_ID=#{copyrightId}
         </if>
+
     </select>
 
+    <select id="queryCopyright" resultType="com.javakc.cms.modules.copyright.entity.Copyright">
+        SELECT COPYRIGHT_ID AS copyrightId,COPYRIGHT_NAME AS copyrightName FROM COPYRIGHT WHERE 1=1
+    </select>
 </mapper>

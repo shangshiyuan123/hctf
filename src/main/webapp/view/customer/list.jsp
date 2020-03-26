@@ -23,7 +23,9 @@
         </div>
         <div class="form-group col-md-4">
             <label>版权名：</label>
-            <input type="text" class="form-control" name="copyrightName" placeholder="请输入版权名称">
+            <select id="copyright" class="form-control" name="copyright.copyrightId">
+                <option value="0">请选择</option>
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label>姓名：</label>
@@ -32,6 +34,7 @@
         <div class="form-group col-md-4">
           <button class="btn btn-info" type="submit">查询</button>
         </div>
+
         <div class="form-group col-md-10">客户列表</div>
 
 
@@ -95,6 +98,22 @@
         window.location.href = '<%=path%>/customer/delete/' + customerId + '.do';
     }
     $(document).ready(function () {
+        $(function () {
+            $.ajax({
+                url:'<%=path%>/customer/queryCopyright.do',
+                dataType:'json',
+                type:'POST',
+                success:function (data) {
+                    var html='';
+                    $.each(data,function (i,item) {
+                        html+="<option value='"+item.copyrightId+"'>"+item.copyrightName+"</option>";
+                    });
+                    $('#copyright').append(html);
+                }
+            })
+        });
+
+
         $('#checkall').click(function () {
             $('[name=id]').prop('checked', $(this).prop('checked'));
         });

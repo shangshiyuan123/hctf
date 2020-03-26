@@ -1,5 +1,6 @@
 package com.javakc.cms.modules.customer.service;
 
+import com.javakc.cms.modules.copyright.entity.Copyright;
 import com.javakc.cms.modules.customer.dao.CustomerDao;
 import com.javakc.cms.modules.customer.entity.Customer;
 import org.apache.commons.lang3.StringUtils;
@@ -50,8 +51,7 @@ public class CustomerService {
         param.put("size",size);
         param.put("name",entity.getName());
         if(entity.getCopyright()!=null){
-            param.put("copyrightName",entity.getCopyright().getCopyrightName());
-            System.out.println(entity.getCopyright().getCopyrightName());
+                param.put("copyright.copyrightId",entity.getCopyright().getCopyrightId());
         }
 
         return customerDao.query(param);
@@ -60,11 +60,12 @@ public class CustomerService {
         Map<String,Object> param=new HashMap<>();
         param.put("name",entity.getName());
         if(entity.getCopyright()!=null){
-            param.put("copyrightName",entity.getCopyright().getCopyrightName());
+            param.put("copyright.copyrightId",entity.getCopyright().getCopyrightId());
         }
         return customerDao.queryByCount(param);
     }
 
-
-
+    public List<Copyright> queryCopyright(){
+        return customerDao.queryCopyright();
+    }
 }

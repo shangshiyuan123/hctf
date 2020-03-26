@@ -15,9 +15,14 @@
 <body>
 <div class="container">
     <form class="form-horizontal" action="<%=path%>/customer/create.do" method="post">
+
         <div class="form-group">
             <label class="col-md-2 control-label">绑定版权:</label>
-          <input type="text" class="form-control" name="copyrightName" placeholder="请输入版权"/>
+            <div class="col-md-6">
+                <select id="copyright" class="form-control" name="copyright.copyrightId">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-group">
@@ -100,6 +105,27 @@
         </div>
     </form>
 </div>
+<script type="text/javascript" src="<%=path%>/static/lib/layer/1.9.3/layer.js"></script>
+<script type="text/javascript" src="<%=path%>/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=path%>/static/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $.ajax({
+                url: '<%=path%>/customer/queryCopyright.do',
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) {
+                    var html = '';
+                    $.each(data, function (i, item) {
+                        html += "<option value='" + item.copyrightId + "'>" + item.copyrightName + "</option>";
+                    });
+                    $('#copyright').append(html);
+                }
+            })
+        });
+    });
 
+</script>
 </body>
 </html>

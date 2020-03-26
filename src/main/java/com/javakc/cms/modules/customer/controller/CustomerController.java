@@ -1,6 +1,7 @@
 package com.javakc.cms.modules.customer.controller;
 
 import com.javakc.cms.base.page.Page;
+import com.javakc.cms.modules.copyright.entity.Copyright;
 import com.javakc.cms.modules.customer.entity.Customer;
 import com.javakc.cms.modules.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("customer")
@@ -29,7 +33,6 @@ public class CustomerController {
     }
     @RequestMapping("query")
     public String query(Customer entity, Page page, ModelMap model){
-        System.out.println(entity.getCopyright());
         page.setList(customerService.query(entity,page.getStart(),page.getSize()));
         page.setCount(customerService.queryByCount(entity));
         model.put("page", page);
@@ -59,5 +62,12 @@ public class CustomerController {
     public String batch(@PathVariable String[] ids) {
         customerService.batch(ids);
         return "redirect:/customer/query.do";
+    }
+
+    @RequestMapping("queryCopyright")
+    @ResponseBody
+    public List<Copyright> queryCopyright(){
+        List<Copyright> list=customerService.queryCopyright();
+        return list;
     }
 }
