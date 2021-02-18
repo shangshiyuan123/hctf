@@ -29,7 +29,7 @@
     <oracle.version>11.1.0</oracle.version>
     <mysql.version>5.1.30</mysql.version>
     <!-- jackson版本 -->
-    <jackson.version>2.10.3</jackson.version>
+    <jackson.version>2.12.1</jackson.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
